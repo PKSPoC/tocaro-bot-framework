@@ -1,11 +1,9 @@
 from quotes_provider import QuoteProvider
-from quote_provider_by_file import QuoteProviderByFile
 from tocaro_handler import TocaroHandler
 
 
 def lambda_handler(event, context):
-    p = QuoteProviderByFile()
-    harukas = QuoteProvider(p)
+    harukas = QuoteProvider()
 
     tocaro = TocaroHandler()
     quote = harukas.get_quote()

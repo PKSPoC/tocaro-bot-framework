@@ -1,9 +1,9 @@
 from quote_provider_by_file import QuoteProviderByFile
 
 
-class QuoteProvider:
-    def __init__(self, provider):
-        self.provider = provider
+class QuoteProvider(QuoteProviderByFile):
+    def __init__(self):
+        super(QuoteProvider, self).__init__("./HarukasQuotes.txt")
 
     def get_quote(self):
-        return self.provider.get_quote()
+        return super().get_quote()
