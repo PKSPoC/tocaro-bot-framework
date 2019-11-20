@@ -1,5 +1,5 @@
-from quotes_provider import QuoteProvider
-from tocaro_handler import TocaroHandler
+from sample.quotes_provider import QuoteProvider
+from modules.tocaro_handler import TocaroHandler
 
 
 def lambda_handler(event, context):
@@ -9,12 +9,16 @@ def lambda_handler(event, context):
     quote = harukas.get_quote()
 
     tocaro.set_text("はるかの言い間違いコレクション No.{0}".format(str(quote["number"])))
-    tocaro.set_color("danger")
+    tocaro.set_color("success")
     tocaro.set_attachments(
         [{
             "title:": "None",
             "value": quote["content"]
-        }]
+        },
+            {
+                "image_url": "https://s3-ap-northeast-1.amazonaws.com/vortex.fun.training.fy19/haruka.jpg"
+            }
+        ]
     )
 
     r = tocaro.send2tocaro()

@@ -3,7 +3,7 @@ import random
 
 class QuoteProviderByFile:
     def __init__(self, filename):
-        with open(filename, "r") as f:
+        with open(filename, "r", encoding="utf-8") as f:
             self.haruka_quotes = f.readlines()
 
     def get_quote(self):

@@ -1,4 +1,4 @@
-from quote_provider_by_file import QuoteProviderByFile
+from sample.quote_provider_by_file import QuoteProviderByFile
 
 
 class QuoteProvider(QuoteProviderByFile):
