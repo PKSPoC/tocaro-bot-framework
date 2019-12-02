@@ -1,22 +1,21 @@
-import urllib.request
-import json
 import os
-import ssl
+
+from http_client import HttpClient
 
 
 class TocaroHandler:
+
     def __init__(self):
         self.message = {
             "text": "string",
-            "color": "color",
+            "color": "color //info,warning,danger,success",
             "attachments": [
                 {
                     "title": "string",
                     "value": "string"
                 },
-                {
-                    "image_url": "url"
-                }
+                {"image_url": "URL"}
+
             ]
         }
 
@@ -30,11 +29,14 @@ class TocaroHandler:
         self.message["attachments"] = contents
 
     def send2tocaro(self):
-        tocaro_url = os.environ['TOCARO_URL']
-        context = ssl.SSLContext(ssl.PROTOCOL_TLSv1)
-
-        headers = {'Content-type': 'application/json'}
-        req = urllib.request.Request(tocaro_url, json.dumps(self.message).encode(), headers)
-        with urllib.request.urlopen(req, context=context) as res:
-            body = res.read()
+        tocaro_url = os.environ["TOCARO_URL"]
+        headers = {"Content-type": "application/json"}
+        body = HttpClient.post(tocaro_url, self.message, headers)
         return body
+
+
+if __name__ == "__main__":
+    t = TocaroHandler()
+    t.set_text("test-death")
+    t.set_color("danger")
+    print(t.send2tocaro())
