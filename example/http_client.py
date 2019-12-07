@@ -20,13 +20,13 @@ class HttpClient:
 
     """
     @staticmethod
-    def put(url, contents, headers):
-        req = urllib.request.Request(url, json.dumps(contents), headers=headers)
+    def put(base_url, contents, headers):
+        req = urllib.request.Request(base_url, json.dumps(contents), headers=headers)
         req.get_method = lambda: "PUT"
         return HttpHandler.fetch_api(req)
     @staticmethod
-    def delete(url, headers):
-        req = urllib.request.Request(url, headers=headers)
+    def delete(base_url, headers):
+        req = urllib.request.Request(base_url, headers=headers)
         req.get_method = lambda: "DELETE"
         return HttpHandler.fetch_api(req)
     """
