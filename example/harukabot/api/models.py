@@ -15,8 +15,8 @@ class Quote(models.Model):
     STATUS_DRAFT = "draft"
     STATUS_PUBLIC = "public"
     STATUS_SET = (
-            (STATUS_DRAFT, "下書き"),
-            (STATUS_PUBLIC, "公開中"),
+        (STATUS_DRAFT, "下書き"),
+        (STATUS_PUBLIC, "公開中"),
     )
     quote = models.TextField()
     author = models.ForeignKey(User, related_name="quotes", on_delete=models.CASCADE)
@@ -28,3 +28,13 @@ class Quote(models.Model):
         return "{}: {} by{}".format(self.pk, self.quote, self.author.name)
 
     __str__ = __repr__
+
+
+class Command(models.Model):
+    command = models.TextField()
+
+    def __repr__(self):
+        return "{}: {}".format(self.pk, self.command)
+
+    __str__ = __repr__
+

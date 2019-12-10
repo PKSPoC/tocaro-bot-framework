@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Quote
+from .models import User, Quote, Command
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -15,3 +15,10 @@ class QuoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Quote
         fields = ("id", "quote", "author", "status", "created_at")
+
+
+class CommandSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Command
+        fields = ("id", "command")

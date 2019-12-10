@@ -6,4 +6,4 @@ __pycache__/
 .idea/**/tasks.xml
 db.sqlite3
 *.pyc
-
+collected_static/

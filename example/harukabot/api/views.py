@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from rest_framework import viewsets, filters
-from .models import User, Quote
-from .serializer import UserSerializer, QuoteSerializer
+from .models import User, Quote, Command
+from .serializer import UserSerializer, QuoteSerializer, CommandSerializer
+
+
 # from django.views.decorators.csrf import csrf_exempt
 # from django.utils.decorators import method_decorator
 
@@ -22,3 +24,9 @@ class QuoteViewSet(viewsets.ModelViewSet):
     queryset = Quote.objects.all()
     serializer_class = QuoteSerializer
     filter_fields = ("author", "status", "id")
+
+
+class CommandViewSet(viewsets.ModelViewSet):
+    authentication_classes = []
+    queryset = Command.objects.all()
+    serializer_class = CommandSerializer

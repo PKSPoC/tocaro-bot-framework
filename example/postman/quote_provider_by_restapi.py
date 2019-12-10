@@ -24,7 +24,7 @@ class QuoteProviderByRestApi:
 
 
 def main():
-    q = QuoteProviderByRestApi("http://localhost:8000/assets/")
+    q = QuoteProviderByRestApi("http://localhost:8000/api/")
     print(q.get_quote())
 
 

@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
                 ('status', models.CharField(choices=[('draft', '下書き'), ('public', '公開中')], default='draft', max_length=8)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='quotes', to='assets.User')),
+                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='quotes', to='api.User')),
             ],
         ),
     ]
