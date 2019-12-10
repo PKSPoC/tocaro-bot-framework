@@ -16,8 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from assets.urls import router as assets_router
+from commands.urls import router as commands_router
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('assets/', include(assets_router.urls))
+    path('assets/', include(assets_router.urls)),
+    path('commands/', include(commands_router.urls))
 ]

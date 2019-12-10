@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets, filters
 from .models import User, Quote
-from .selializer import UserSerializer, QuoteSerializer
+from .serializer import UserSerializer, QuoteSerializer
 # from django.views.decorators.csrf import csrf_exempt
 # from django.utils.decorators import method_decorator
 
