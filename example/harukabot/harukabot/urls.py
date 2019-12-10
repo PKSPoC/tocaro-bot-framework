@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from restapi.urls import router as restapi_router
+from assets.urls import router as assets_router
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(restapi_router.urls))
+    path('assets/', include(assets_router.urls))
 ]
