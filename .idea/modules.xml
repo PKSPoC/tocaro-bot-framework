@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/example/example.iml" filepath="$PROJECT_DIR$/example/example.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/tocaro-bot-framework.iml" filepath="$PROJECT_DIR$/.idea/tocaro-bot-framework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/example/harukabot/harukabot.iml" filepath="$PROJECT_DIR$/example/harukabot/harukabot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/example/tocaro.iml" filepath="$PROJECT_DIR$/example/tocaro.iml" />
     </modules>
   </component>
 </project>

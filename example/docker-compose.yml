@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+  webserver:
+    build:
+      context: ./webserver
+     #args:
+     #  http_proxy: "http://hogemoge:password@proxy:8080"
+     #  https_proxy: "http://hogemoge:password@proxy:8080"
+    ports:
+      - "8080:8080"
+    links:
+      - "harukabot"
+    environment:
+      TZ: Asia/Tokyo
+      # env_file: .env
+
+  harukabot:
+    build:
+      context: ./harukabot
+      #args:
+      #  http_proxy: "http://hogemoge:password@proxy:8080"
+      #  https_proxy: "http://hogemoge:password@proxy:8080"
+    expose:
+      - "8081"
+    environment:
+      TZ: Asia/Tokyo
+    # env_file: .env
+

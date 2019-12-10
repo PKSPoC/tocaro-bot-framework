@@ -12,6 +12,7 @@ django = "*"
 djangorestframework = "*"
 django-rest-framework = "*"
 django-filter = "*"
+uwsgi = "*"
 
 [requires]
 python_version = "3.6"
