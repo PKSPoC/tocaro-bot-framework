@@ -1,5 +1,8 @@
 # db backup
-sqlite3 db.sqlite3 .dump
+$ sqlite3 db.sqlite3 .dump > db.backup.sql
 
 # db restore
-sqlite3 db.sqlite3 .dump
+## you don't need to mingate of django. after install django, just do it.
+## before you do, need to install sqlite3 by apt or so.
+$ sqlite3 db.sqlite3 '.read db.backup.sql'
+
