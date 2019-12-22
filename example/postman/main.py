@@ -4,7 +4,6 @@ from tocaro_handler import TocaroHandler
 
 def lambda_handler(event, context):
     harukas = QuoteProvider()
-
     tocaro = TocaroHandler()
 
     # quote = {"content": "QUOTE","number":"NUMBER"}

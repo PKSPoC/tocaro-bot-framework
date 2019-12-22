@@ -2,6 +2,8 @@ from django.db import models
 
 
 class User(models.Model):
+    objects = None
+    STATUS_DRAFT = "draft"
     name = models.CharField(max_length=32)
     email = models.EmailField()
 
@@ -12,6 +14,7 @@ class User(models.Model):
 
 
 class Quote(models.Model):
+    objects = None
     STATUS_DRAFT = "draft"
     STATUS_PUBLIC = "public"
     STATUS_SET = (
