@@ -26,4 +26,19 @@ services:
     environment:
       TZ: Asia/Tokyo
     # env_file: .env
+    links:
+      - db
+
+  db:
+    image:
+      mysql:latest
+    expose:
+      - "3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_DATABASE: harukabot
+      MYSQL_USER: harukabot
+      MYSQL_PASSWORD: harukabot
+      TZ: Asia/Tokyo
+
 
