@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: harukabot-web
+spec:
+  selector:
+    matchLabels:
+      app: web
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - name: webserver
+          image: localhost:5000/harukabot/webserver
+          ports:
+            - containerPort: 8080
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: harukabot-api
+spec:
+  selector:
+    matchLabels:
+      app: api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: api 
+    spec:
+      containers:
+        - name: apisever
+          image: localhost:5000/harukabot/harukabot
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: harukabot-web-service
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      nodePort: 31000
+  selector:
+    app: web
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: harukabot-api-service
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8081
+  selector:
+    app: api
+
