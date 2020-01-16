@@ -79,7 +79,7 @@ DATABASES = {
         'NAME': 'harukabot',
         'USER': 'harukabot',
         'PASSWORD': 'harukabot',
-        'HOST': 'db',
+        'HOST': 'database',
         'PORT': '5432'
     }
 }

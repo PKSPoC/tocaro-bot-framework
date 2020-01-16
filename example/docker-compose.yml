@@ -1,39 +1,32 @@
 version: '2'
 
 services:
-  webserver:
+  front-web:
     build:
-     context: ./webserver
-     #args:
-     #  http_proxy: "http://hogemoge:password@proxy:8080"
-     #  https_proxy: "http://hogemoge:password@proxy:8080"
+     context: ./frontweb
     ports:
       - "8080:8080"
-    links:
-      - "harukabot-api-service"
     environment:
       TZ: Asia/Tokyo
-      # env_file: .env
+    links:
+      - "api-engine"
 
-  harukabot-api-service:
+  api-engine:
     build:
-      context: ./harukabot
-      #args:
-      #  http_proxy: "http://hogemoge:password@proxy:8080"
-      #  https_proxy: "http://hogemoge:password@proxy:8080"
+      context: ./apiengine
     expose:
       - "8081"
     environment:
       TZ: Asia/Tokyo
-    # env_file: .env
     links:
-      - "db" 
+      - "database" 
 
-  db:
+  database:
     image:
       postgres:12.1
     expose:
       - "5432"
+    environment:
       TZ: Asia/Tokyo
     volumes:
       - dbdata:/var/lib/postgresql/data/
