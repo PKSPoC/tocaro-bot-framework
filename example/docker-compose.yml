@@ -1,17 +1,17 @@
 version: '2'
 
 services:
-  front-web:
+  webserver:
     build:
-     context: ./frontweb
+     context: ./webserver
     ports:
       - "8080:8080"
     environment:
       TZ: Asia/Tokyo
     links:
-      - "api-engine"
+      - "apiengine"
 
-  api-engine:
+  apiengine:
     build:
       context: ./apiengine
     expose:
