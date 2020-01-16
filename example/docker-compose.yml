@@ -10,12 +10,12 @@ services:
     ports:
       - "8080:8080"
     links:
-      - "harukabot"
+      - "harukabot-api-service"
     environment:
       TZ: Asia/Tokyo
       # env_file: .env
 
-  harukabot:
+  harukabot-api-service:
     build:
       context: ./harukabot
       #args:
@@ -27,18 +27,17 @@ services:
       TZ: Asia/Tokyo
     # env_file: .env
     links:
-      - db
+      - "db" 
 
   db:
     image:
-      mysql:latest
+      postgres:12.1
     expose:
-      - "3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: mysql
-      MYSQL_DATABASE: harukabot
-      MYSQL_USER: harukabot
-      MYSQL_PASSWORD: harukabot
+      - "5432"
       TZ: Asia/Tokyo
+    volumes:
+      - dbdata:/var/lib/postgresql/data/
 
-
+volumes:
+  dbdata:
+    driver: local
