@@ -1,7 +1,7 @@
 version: '2'
 
 services:
-  webserver:
+  webserver-svc:
     build:
      context: ./webserver
     ports:
@@ -9,9 +9,9 @@ services:
     environment:
       TZ: Asia/Tokyo
     links:
-      - "apiengine"
+      - "apiengine-svc"
 
-  apiengine:
+  apiengine-svc:
     build:
       context: ./apiengine
     expose:
@@ -19,9 +19,9 @@ services:
     environment:
       TZ: Asia/Tokyo
     links:
-      - "database" 
+      - "database-svc" 
 
-  database:
+  database-svc:
     image:
       postgres:12.1
     expose:

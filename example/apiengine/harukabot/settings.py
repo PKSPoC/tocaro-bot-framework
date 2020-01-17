@@ -79,7 +79,7 @@ DATABASES = {
         'NAME': 'harukabot',
         'USER': 'harukabot',
         'PASSWORD': 'harukabot',
-        'HOST': 'database',
+        'HOST': 'database-svc',
         'PORT': '5432'
     }
 }
