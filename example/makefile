@@ -26,3 +26,14 @@ buildAll: buildApiEngine collectStatic buildWebServer
 up:
 	docker-compose up -d
 
+tagLocalImage:
+	docker tag example_webserver-svc localhost:5000/harukabot/webserver
+	docker tag example_apiengine-svc localhost:5000/harukabot/apiengine
+
+pushToLocalDockerResistry:
+	docker push localhost:5000/harukabot/webserver
+	docker push localhost:5000/harukabot/apiengine
+
+runLocalDockerRegisty:
+	docker run -d --restart=always -p 5000:5000 -v /home/jkanai/dockerreg:/var/lib/registry registry:latest
+

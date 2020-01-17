@@ -1,0 +1,102 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webserver
+spec:
+  selector:
+    matchLabels:
+      app: webserver
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: webserver
+    spec:
+      containers:
+        - name: webserver
+          image: localhost:5000/harukabot/webserver
+          ports:
+            - containerPort: 8080
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apiengine
+spec:
+  selector:
+    matchLabels:
+      app: apiengine
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: apiengine
+    spec:
+      containers:
+        - name: apiengine
+          image: localhost:5000/harukabot/apiengine
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database
+spec:
+  selector:
+    matchLabels:
+      app: database 
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: database
+    spec:
+      containers:
+        - name: database
+          image: postgres:12.1
+          volumeMounts:
+            - mountPath: "/var/lib/postgresql/data"
+              name: dbdata
+      volumes:
+        - name: dbdata
+          persistentVolumeClaim:
+            claimName: pvc0001
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webserver-svc
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      nodePort: 31000
+  selector:
+    app: webserver
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: apiengine-svc
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8081
+  selector:
+    app: apiengine
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: database-svc
+spec:
+  type: ClusterIP
+  ports:
+    - port: 5432
+  selector:
+    app: database
+
