@@ -35,5 +35,6 @@ pushToLocalDockerResistry:
 	docker push localhost:5000/harukabot/apiengine
 
 runLocalDockerRegisty:
-	docker run -d --restart=always -p 5000:5000 -v /home/jkanai/dockerreg:/var/lib/registry registry:latest
+	sudo mkdir -p /mnt/nfs/docker-registory
+	docker run -d --restart=always -p 5000:5000 -v /mnt/nfs/docker-registory:/var/lib/registry registry:latest
 
