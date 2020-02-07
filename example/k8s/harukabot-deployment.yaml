@@ -38,41 +38,14 @@ spec:
           image: localhost:5000/harukabot/apiengine
 
 ---
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: database
-spec:
-  selector:
-    matchLabels:
-      app: database 
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: database
-    spec:
-      containers:
-        - name: database
-          image: postgres:12.1
-          volumeMounts:
-            - mountPath: "/var/lib/postgresql/data"
-              name: dbdata
-      volumes:
-        - name: dbdata
-          persistentVolumeClaim:
-            claimName: pvc0001
-
----
 apiVersion: v1
 kind: Service
 metadata:
   name: webserver-svc
 spec:
-  type: NodePort
+  type: LoadBalncer
   ports:
     - port: 8080
-      nodePort: 31000
   selector:
     app: webserver
 
@@ -87,16 +60,4 @@ spec:
     - port: 8081
   selector:
     app: apiengine
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: database-svc
-spec:
-  type: ClusterIP
-  ports:
-    - port: 5432
-  selector:
-    app: database
 
