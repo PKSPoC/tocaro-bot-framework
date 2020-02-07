@@ -28,6 +28,11 @@ services:
       - "5432"
     environment:
       TZ: Asia/Tokyo
+      POSTGRES_USER: harukabot
+      POSTGRES_PASSWORD: harukabot
+      PGPASSWORD: harukabot
+      POSTGRES_DB: harukabot
+      #DATABASE_HOST=localhost
     volumes:
       - dbdata:/var/lib/postgresql/data/
 
