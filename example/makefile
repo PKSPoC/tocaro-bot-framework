@@ -6,7 +6,7 @@ buildApiEngine:
 	docker-compose build apiengine-svc
 
 collectStatic:
-	docker run --rm -t -v $PWD:/tmp --entrypoint=./collectstatic.sh example_apiengine-svc:latest
+	docker run --rm -t -v $(PWD):/tmp --entrypoint=./collectstatic.sh example_apiengine-svc:latest
 
 buildWebServer: buildApiEngine
 	docker-compose build webserver-svc
@@ -15,8 +15,6 @@ buildAll: buildApiEngine collectStatic buildWebServer
 
 setupDatabase:
 	docker-compose up -d
-	#docker exec -t example_database-svc_1 psql -U postgres -c "CREATE ROLE harukabot WITH LOGIN PASSWORD 'harukabot';"
-	#docker exec -t example_database-svc_1 psql -U postgres -c "CREATE DATABASE harukabot;"
 	docker exec -t example_apiengine-svc_1 python manage.py makemigrations
 	docker exec -t example_apiengine-svc_1 python manage.py migrate
 	docker exec -it example_apiengine-svc_1 python manage.py createsuperuser
@@ -26,13 +24,13 @@ downAndClean:
 	docker-compose down
 	docker volume rm example_dbdata
 
-tagLocalImage:
-	docker tag example_webserver-svc localhost:5000/harukabot/webserver
-	docker tag example_apiengine-svc localhost:5000/harukabot/apiengine
+tagImage:
+	docker tag example_webserver-svc pk-hbr-hj-801.hj.vm/harborpj1/example/webserver
+	docker tag example_apiengine-svc pk-hbr-hj-801.hj.vm/harborpj1/example/apiengine
 
-pushToLocalDockerResistry:
-	docker push localhost:5000/harukabot/webserver
-	docker push localhost:5000/harukabot/apiengine
+pushToHarbor:
+	docker push pk-hbr-hj-801.hj.vm/harborpj1/example/webserver
+	docker push pk-hbr-hj-801.hj.vm/harborpj1/example/apiengine
 
 runLocalDockerRegisty:
 	sudo mkdir -p /mnt/nfs/docker-registory

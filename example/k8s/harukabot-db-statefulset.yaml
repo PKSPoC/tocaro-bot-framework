@@ -2,11 +2,13 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: database
+  namespace: pvtest
 spec:
   selector:
     matchLabels:
       app: database 
   replicas: 1
+  serviceName: database-svc
   template:
     metadata:
       labels:
@@ -14,26 +16,41 @@ spec:
     spec:
       containers:
         - name: database
-          image: postgres:12.1
+          image: pk-hbr-hj-801.hj.vm/harborpj1/postgres:12.1
           volumeMounts:
             - name: dbdata
-            - mountPath: "/var/lib/postgresql/data"
-      volumeClaimTemplates:
-      - metadata:
-          name: dbdata
-        spec:
-          accessModes:
-          - ReadWriteOnce:
-          volumeMode: Filesystem
-          resource:
-            requests:
-              storage: 1Gi
+              mountPath: "/var/lib/postgresql/data"
+          env:
+            - name: TZ
+              value: Asia/Tokyo
+            - name: POSTGRES_USER
+              value: harukabot
+            - name: POSTGRES_PASSWORD
+              value: harukabot
+            - name: PGPASSWORD
+              value: harukabot
+            - name: POSTGRES_DB
+              value: harukabot
+            - name: PGDATA
+              value: /var/lib/postgresql/data/db-files/
+  volumeClaimTemplates:
+  - metadata:
+      name: dbdata
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      volumeMode: Filesystem
+      storageClassName: fast
+      resources:
+        requests:
+          storage: 4Gi
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: database-svc
+  namespace: pvtest
 spec:
   type: ClusterIP
   ports:

@@ -1,0 +1,9 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata: 
+  name: fast
+provisioner: kubernetes.io/vsphere-volume
+parameters: 
+  datastore: VxRail-Virtual-SAN-Datastore-00fad154-42eb-4c54-b47f-0cce5312f867
+  diskformat: thin
+  fstype: ext3

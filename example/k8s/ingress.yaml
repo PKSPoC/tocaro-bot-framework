@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress
+  namespace: pvtest
+  annotations:
+      #nginx.ingress.kubernetes.io/rewrite-target: /
+      kubernetes.io/ingress.global-static-ip-name: "web-static-ip"
+spec:
+  tls:
+  - secretName: pkspoc-ingress-secret
+  rules:
+  - host: tocarobot.com
+    http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: webserver-svc
+          servicePort: 8080
+
